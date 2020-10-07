@@ -1,0 +1,53 @@
+---
+title: "Developing Data Products  Week 3 Assignment"
+author: "By Ivo Alabe"
+date: "10/6/2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+
+- We will use mtcars dataset
+- We will use plotly to generate interactive plots
+
+
+## Data Visualization I
+
+````{r plot, echo=FALSE, message=FALSE, warning=FALSE}
+suppressPackageStartupMessages(library(plotly))
+plot_ly(data = mtcars, x = ~wt, y = ~mpg, 
+        color = ~as.factor(cyl), size = ~hp,
+        text = ~paste("Weight: ", wt, '<br>MPG:', mpg),
+        type = "scatter", mode = "markers") %>%
+  layout(title = "Car Data")
+````
+
+
+## Data Visualization II
+
+```{r cars, echo = FALSE, message=FALSE,warning=FALSE}
+data(mtcars)
+cars <- mtcars
+plot_ly(cars, x=cars$wt, y=cars$mpg, 
+        mode="markers", color=cars$hp, size=cars$qsec) %>%
+  layout(xaxis = list(title = "Weight (1000 lbs)"),
+         yaxis = list(title = "miles per gallon") )
+```
+
+## Data Visualization III
+
+```{r pressure, echo=FALSE,message=FALSE,warning=FALSE}
+plot_ly(cars, x=cars$wt, y=cars$mpg, z=cars$hp, 
+        type="scatter3d", mode="markers", 
+        color=cars$drat, size=cars$qsec) %>%
+  layout(scene=list(
+    xaxis = list(title = "Weight (1000 lbs)"),
+    yaxis = list(title = "miles per gallon"),
+    zaxis = list(title = "Gross horsepower)"))
+    )
+```
+
